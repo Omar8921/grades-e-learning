@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<head>
+
+</head>
+
+<body>
+    <video controls style="width: 100%; height: 100%;">
+        <source src="Images\watercycle.mp4">
+    </video>
+</body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Generator</title>
+</head>
+<body>
+    <div id="output"></div>
+
+    <script>
+        function generateText() {
+            var inputText = document.getElementById('inputText').value;
+
+            fetch('/generate_text', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ input: inputText })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerText = data.generated_text;
+            })
+            .catch(error => console.error('Error:', error));
+
+            generateText();
+        }
+    </script>
+</body>
+</html>
